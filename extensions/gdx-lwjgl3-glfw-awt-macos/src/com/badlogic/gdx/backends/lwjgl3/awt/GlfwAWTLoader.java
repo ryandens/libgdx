@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.UUID;
 import java.util.zip.CRC32;
@@ -33,7 +34,7 @@ import com.badlogic.gdx.utils.SharedLibraryLoader;
 public class GlfwAWTLoader {
 	static public boolean isMac = System.getProperty("os.name").contains("Mac");
 
-	static private final Random random = new Random();
+	static private final Random random = new SecureRandom();
 
 	public static void closeQuietly (Closeable c) {
 		if (c != null) {
