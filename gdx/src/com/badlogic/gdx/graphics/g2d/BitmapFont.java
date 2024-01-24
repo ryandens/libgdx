@@ -22,6 +22,7 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -492,7 +493,7 @@ public class BitmapFont implements Disposable {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fontFile.read()), 512);
 			try {
-				String line = reader.readLine(); // info
+				String line = BoundedLineReader.readLine(reader, 5_000_000); // info
 				if (line == null) throw new GdxRuntimeException("File is empty.");
 
 				line = line.substring(line.indexOf("padding=") + 8);
@@ -504,7 +505,7 @@ public class BitmapFont implements Disposable {
 				padLeft = Integer.parseInt(padding[3]);
 				float padY = padTop + padBottom;
 
-				line = reader.readLine();
+				line = BoundedLineReader.readLine(reader, 5_000_000);
 				if (line == null) throw new GdxRuntimeException("Missing common header.");
 				String[] common = line.split(" ", 9); // At most we want the 6th element; i.e. "page=N"
 
@@ -530,7 +531,7 @@ public class BitmapFont implements Disposable {
 				// Read each page definition.
 				for (int p = 0; p < pageCount; p++) {
 					// Read each "page" info line.
-					line = reader.readLine();
+					line = BoundedLineReader.readLine(reader, 5_000_000);
 					if (line == null) throw new GdxRuntimeException("Missing additional page definitions.");
 
 					// Expect ID to mean "index".
@@ -554,7 +555,7 @@ public class BitmapFont implements Disposable {
 				descent = 0;
 
 				while (true) {
-					line = reader.readLine();
+					line = BoundedLineReader.readLine(reader, 5_000_000);
 					if (line == null) break; // EOF
 					if (line.startsWith("kernings ")) break; // Starting kernings block.
 					if (line.startsWith("metrics ")) break; // Starting metrics block.
@@ -605,7 +606,7 @@ public class BitmapFont implements Disposable {
 				descent += padBottom;
 
 				while (true) {
-					line = reader.readLine();
+					line = BoundedLineReader.readLine(reader, 5_000_000);
 					if (line == null) break;
 					if (!line.startsWith("kerning ")) break;
 

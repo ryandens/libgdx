@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -1120,53 +1121,53 @@ public class ParticleEmitter {
 	public void load (BufferedReader reader) throws IOException {
 		try {
 			name = readString(reader, "name");
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			delayValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			durationValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			setMinParticleCount(readInt(reader, "minParticleCount"));
 			setMaxParticleCount(readInt(reader, "maxParticleCount"));
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			emissionValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			lifeValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			lifeOffsetValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			xOffsetValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			yOffsetValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			spawnShapeValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			spawnWidthValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			spawnHeightValue.load(reader);
-			String line = reader.readLine();
+			String line = BoundedLineReader.readLine(reader, 5_000_000);
 			if (line.trim().equals("- Scale -")) {
 				xScaleValue.load(reader);
 				yScaleValue.setActive(false);
 			} else {
 				xScaleValue.load(reader);
-				reader.readLine();
+				BoundedLineReader.readLine(reader, 5_000_000);
 				yScaleValue.load(reader);
 			}
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			velocityValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			angleValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			rotationValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			windValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			gravityValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			tintValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			transparencyValue.load(reader);
-			reader.readLine();
+			BoundedLineReader.readLine(reader, 5_000_000);
 			attached = readBoolean(reader, "attached");
 			continuous = readBoolean(reader, "continuous");
 			aligned = readBoolean(reader, "aligned");
@@ -1174,18 +1175,18 @@ public class ParticleEmitter {
 			behind = readBoolean(reader, "behind");
 
 			// Backwards compatibility
-			line = reader.readLine();
+			line = BoundedLineReader.readLine(reader, 5_000_000);
 			if (line.startsWith("premultipliedAlpha")) {
 				premultipliedAlpha = readBoolean(line);
-				line = reader.readLine();
+				line = BoundedLineReader.readLine(reader, 5_000_000);
 			}
 			if (line.startsWith("spriteMode")) {
 				spriteMode = SpriteMode.valueOf(readString(line));
-				line = reader.readLine();
+				line = BoundedLineReader.readLine(reader, 5_000_000);
 			}
 
 			Array<String> imagePaths = new Array<String>();
-			while ((line = reader.readLine()) != null && !line.isEmpty()) {
+			while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null && !line.isEmpty()) {
 				imagePaths.add(line);
 			}
 			setImagePaths(imagePaths);
@@ -1200,7 +1201,7 @@ public class ParticleEmitter {
 	}
 
 	static String readString (BufferedReader reader, String name) throws IOException {
-		String line = reader.readLine();
+		String line = BoundedLineReader.readLine(reader, 5_000_000);
 		if (line == null) throw new IOException("Missing value: " + name);
 		return readString(line);
 	}
@@ -1560,7 +1561,7 @@ public class ParticleEmitter {
 			super.load(reader);
 			// For backwards compatibility, independent property may not be defined
 			if (reader.markSupported()) reader.mark(100);
-			String line = reader.readLine();
+			String line = BoundedLineReader.readLine(reader, 5_000_000);
 			if (line == null) throw new IOException("Missing value: independent");
 			if (line.contains("independent"))
 				independent = Boolean.parseBoolean(readString(line));
