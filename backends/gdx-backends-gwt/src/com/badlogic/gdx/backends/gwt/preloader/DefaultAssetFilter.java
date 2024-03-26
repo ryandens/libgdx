@@ -48,18 +48,18 @@ public class DefaultAssetFilter implements AssetFilter {
 	}
 
 	private boolean isImage (String extension) {
-		return extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png") || extension.equals("bmp")
-			|| extension.equals("gif");
+		return "jpg".equals(extension) || "jpeg".equals(extension) || "png".equals(extension) || "bmp".equals(extension)
+			|| "gif".equals(extension);
 	}
 
 	private boolean isText (String extension) {
-		return extension.equals("json") || extension.equals("xml") || extension.equals("txt") || extension.equals("glsl")
-			|| extension.equals("fnt") || extension.equals("pack") || extension.equals("obj") || extension.equals("atlas")
-			|| extension.equals("g3dj");
+		return "json".equals(extension) || "xml".equals(extension) || "txt".equals(extension) || "glsl".equals(extension)
+			|| "fnt".equals(extension) || "pack".equals(extension) || "obj".equals(extension) || "atlas".equals(extension)
+			|| "g3dj".equals(extension);
 	}
 
 	private boolean isAudio (String extension) {
-		return extension.equals("mp3") || extension.equals("ogg") || extension.equals("wav");
+		return "mp3".equals(extension) || "ogg".equals(extension) || "wav".equals(extension);
 	}
 
 	@Override

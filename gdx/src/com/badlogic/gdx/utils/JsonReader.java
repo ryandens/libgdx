@@ -204,15 +204,15 @@ public class JsonReader implements BaseJsonReader {
 									} else {
 										String name = names.size > 0 ? names.pop() : null;
 										if (stringIsUnquoted) {
-											if (value.equals("true")) {
+											if ("true".equals(value)) {
 												if (debug) System.out.println("boolean: " + name + "=true");
 												bool(name, true);
 												break outer;
-											} else if (value.equals("false")) {
+											} else if ("false".equals(value)) {
 												if (debug) System.out.println("boolean: " + name + "=false");
 												bool(name, false);
 												break outer;
-											} else if (value.equals("null")) {
+											} else if ("null".equals(value)) {
 												string(name, null);
 												break outer;
 											}
@@ -460,15 +460,15 @@ public class JsonReader implements BaseJsonReader {
 									} else {
 										String name = names.size > 0 ? names.pop() : null;
 										if (stringIsUnquoted) {
-											if (value.equals("true")) {
+											if ("true".equals(value)) {
 												if (debug) System.out.println("boolean: " + name + "=true");
 												bool(name, true);
 												break outer;
-											} else if (value.equals("false")) {
+											} else if ("false".equals(value)) {
 												if (debug) System.out.println("boolean: " + name + "=false");
 												bool(name, false);
 												break outer;
-											} else if (value.equals("null")) {
+											} else if ("null".equals(value)) {
 												string(name, null);
 												break outer;
 											}

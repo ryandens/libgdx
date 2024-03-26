@@ -203,13 +203,13 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	protected void loadLayer (TiledMap map, MapLayers parentLayers, Element element, FileHandle tmxFile,
 		ImageResolver imageResolver) {
 		String name = element.getName();
-		if (name.equals("group")) {
+		if ("group".equals(name)) {
 			loadLayerGroup(map, parentLayers, element, tmxFile, imageResolver);
-		} else if (name.equals("layer")) {
+		} else if ("layer".equals(name)) {
 			loadTileLayer(map, parentLayers, element);
-		} else if (name.equals("objectgroup")) {
+		} else if ("objectgroup".equals(name)) {
 			loadObjectGroup(map, parentLayers, element);
-		} else if (name.equals("imagelayer")) {
+		} else if ("imagelayer".equals(name)) {
 			loadImageLayer(map, parentLayers, element, tmxFile, imageResolver);
 		}
 	}
@@ -464,7 +464,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 				if (value == null) {
 					value = property.getText();
 				}
-				if (type != null && type.equals("object")) {
+				if (type != null && "object".equals(type)) {
 					// Wait until the end of [loadTiledMap] to fetch the object
 					try {
 						// Value should be the id of the object being pointed to
@@ -494,13 +494,13 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 	protected Object castProperty (String name, String value, String type) {
 		if (type == null) {
 			return value;
-		} else if (type.equals("int")) {
+		} else if ("int".equals(type)) {
 			return Integer.valueOf(value);
-		} else if (type.equals("float")) {
+		} else if ("float".equals(type)) {
 			return Float.valueOf(value);
-		} else if (type.equals("bool")) {
+		} else if ("bool".equals(type)) {
 			return Boolean.valueOf(value);
-		} else if (type.equals("color")) {
+		} else if ("color".equals(type)) {
 			// Tiled uses the format #AARRGGBB
 			String opaqueColor = value.substring(3);
 			String alpha = value.substring(1, 3);
@@ -539,21 +539,21 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 			throw new GdxRuntimeException("Unsupported encoding (XML) for TMX Layer Data");
 		}
 		int[] ids = new int[width * height];
-		if (encoding.equals("csv")) {
+		if ("csv".equals(encoding)) {
 			String[] array = data.getText().split(",");
 			for (int i = 0; i < array.length; i++)
 				ids[i] = (int)Long.parseLong(array[i].trim());
 		} else {
-			if (true) if (encoding.equals("base64")) {
+			if (true) if ("base64".equals(encoding)) {
 				InputStream is = null;
 				try {
 					String compression = data.getAttribute("compression", null);
 					byte[] bytes = Base64Coder.decode(data.getText());
 					if (compression == null)
 						is = new ByteArrayInputStream(bytes);
-					else if (compression.equals("gzip"))
+					else if ("gzip".equals(compression))
 						is = new BufferedInputStream(new GZIPInputStream(new ByteArrayInputStream(bytes), bytes.length));
-					else if (compression.equals("zlib"))
+					else if ("zlib".equals(compression))
 						is = new BufferedInputStream(new InflaterInputStream(new ByteArrayInputStream(bytes)));
 					else
 						throw new GdxRuntimeException("Unrecognised compression (" + compression + ") for TMX Layer Data");
@@ -596,7 +596,7 @@ public abstract class BaseTmxMapLoader<P extends BaseTmxMapLoader.Parameters> ex
 		FileHandle result = file.parent();
 		while (tokenizer.hasMoreElements()) {
 			String token = tokenizer.nextToken();
-			if (token.equals(".."))
+			if ("..".equals(token))
 				result = result.parent();
 			else {
 				result = result.child(token);

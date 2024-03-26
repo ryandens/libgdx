@@ -96,11 +96,11 @@ public class Kerning {
 			input.skip(4);
 
 			String tag = new String(tagBytes, "ISO-8859-1");
-			if (tag.equals("head")) {
+			if ("head".equals(tag)) {
 				headOffset = offset;
-			} else if (tag.equals("kern")) {
+			} else if ("kern".equals(tag)) {
 				kernOffset = offset;
-			} else if (tag.equals("GPOS")) {
+			} else if ("GPOS".equals(tag)) {
 				gposOffset = offset;
 			}
 		}

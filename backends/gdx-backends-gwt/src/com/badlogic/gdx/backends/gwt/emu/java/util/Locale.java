@@ -242,11 +242,11 @@ public final class Locale implements Cloneable, Serializable {
 		languageCode = language.toLowerCase();
 		// Map new language codes to the obsolete language
 		// codes so the correct resource bundles will be used.
-		if (languageCode.equals("he")) {
+		if ("he".equals(languageCode)) {
 			languageCode = "iw";
-		} else if (languageCode.equals("id")) {
+		} else if ("id".equals(languageCode)) {
 			languageCode = "in";
-		} else if (languageCode.equals("yi")) {
+		} else if ("yi".equals(languageCode)) {
 			languageCode = "ji";
 		}
 

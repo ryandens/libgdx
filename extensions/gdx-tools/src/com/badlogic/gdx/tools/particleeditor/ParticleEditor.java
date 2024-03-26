@@ -544,8 +544,8 @@ public class ParticleEditor extends JFrame {
 					imagePath = imagePaths.get(i);
 					String imageName = new File(imagePath.replace('\\', '/')).getName();
 					FileHandle file;
-					if (imagePath.equals(ParticleEditor.DEFAULT_PARTICLE)
-						|| imagePath.equals(ParticleEditor.DEFAULT_PREMULT_PARTICLE)) {
+					if (ParticleEditor.DEFAULT_PARTICLE.equals(imagePath)
+						|| ParticleEditor.DEFAULT_PREMULT_PARTICLE.equals(imagePath)) {
 						file = Gdx.files.classpath(imagePath);
 					} else {
 						if ((imagePath.contains("/") || imagePath.contains("\\")) && !imageName.contains("..")) {

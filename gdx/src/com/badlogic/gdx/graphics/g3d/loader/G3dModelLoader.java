@@ -124,15 +124,15 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	}
 
 	protected int parseType (String type) {
-		if (type.equals("TRIANGLES")) {
+		if ("TRIANGLES".equals(type)) {
 			return GL20.GL_TRIANGLES;
-		} else if (type.equals("LINES")) {
+		} else if ("LINES".equals(type)) {
 			return GL20.GL_LINES;
-		} else if (type.equals("POINTS")) {
+		} else if ("POINTS".equals(type)) {
 			return GL20.GL_POINTS;
-		} else if (type.equals("TRIANGLE_STRIP")) {
+		} else if ("TRIANGLE_STRIP".equals(type)) {
 			return GL20.GL_TRIANGLE_STRIP;
-		} else if (type.equals("LINE_STRIP")) {
+		} else if ("LINE_STRIP".equals(type)) {
 			return GL20.GL_LINE_STRIP;
 		} else {
 			throw new GdxRuntimeException(
@@ -147,17 +147,17 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 		for (JsonValue value = attributes.child; value != null; value = value.next) {
 			String attribute = value.asString();
 			String attr = (String)attribute;
-			if (attr.equals("POSITION")) {
+			if ("POSITION".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.Position());
-			} else if (attr.equals("NORMAL")) {
+			} else if ("NORMAL".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.Normal());
-			} else if (attr.equals("COLOR")) {
+			} else if ("COLOR".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.ColorUnpacked());
-			} else if (attr.equals("COLORPACKED")) {
+			} else if ("COLORPACKED".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.ColorPacked());
-			} else if (attr.equals("TANGENT")) {
+			} else if ("TANGENT".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.Tangent());
-			} else if (attr.equals("BINORMAL")) {
+			} else if ("BINORMAL".equals(attr)) {
 				vertexAttributes.add(VertexAttribute.Binormal());
 			} else if (attr.startsWith("TEXCOORD")) {
 				vertexAttributes.add(VertexAttribute.TexCoords(unit++));
@@ -235,25 +235,25 @@ public class G3dModelLoader extends ModelLoader<ModelLoader.ModelParameters> {
 	}
 
 	protected int parseTextureUsage (final String value) {
-		if (value.equalsIgnoreCase("AMBIENT"))
+		if ("AMBIENT".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_AMBIENT;
-		else if (value.equalsIgnoreCase("BUMP"))
+		else if ("BUMP".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_BUMP;
-		else if (value.equalsIgnoreCase("DIFFUSE"))
+		else if ("DIFFUSE".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_DIFFUSE;
-		else if (value.equalsIgnoreCase("EMISSIVE"))
+		else if ("EMISSIVE".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_EMISSIVE;
-		else if (value.equalsIgnoreCase("NONE"))
+		else if ("NONE".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_NONE;
-		else if (value.equalsIgnoreCase("NORMAL"))
+		else if ("NORMAL".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_NORMAL;
-		else if (value.equalsIgnoreCase("REFLECTION"))
+		else if ("REFLECTION".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_REFLECTION;
-		else if (value.equalsIgnoreCase("SHININESS"))
+		else if ("SHININESS".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_SHININESS;
-		else if (value.equalsIgnoreCase("SPECULAR"))
+		else if ("SPECULAR".equalsIgnoreCase(value))
 			return ModelTexture.USAGE_SPECULAR;
-		else if (value.equalsIgnoreCase("TRANSPARENCY")) return ModelTexture.USAGE_TRANSPARENCY;
+		else if ("TRANSPARENCY".equalsIgnoreCase(value)) return ModelTexture.USAGE_TRANSPARENCY;
 		return ModelTexture.USAGE_UNKNOWN;
 	}
 

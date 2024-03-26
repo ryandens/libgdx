@@ -61,7 +61,7 @@ public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 	private void init (TiledMap map) {
 		String axis = map.getProperties().get("staggeraxis", String.class);
 		if (axis != null) {
-			if (axis.equals("x")) {
+			if ("x".equals(axis)) {
 				staggerAxisX = true;
 			} else {
 				staggerAxisX = false;
@@ -70,7 +70,7 @@ public class HexagonalTiledMapRenderer extends BatchTiledMapRenderer {
 
 		String index = map.getProperties().get("staggerindex", String.class);
 		if (index != null) {
-			if (index.equals("even")) {
+			if ("even".equals(index)) {
 				staggerIndexEven = true;
 			} else {
 				staggerIndexEven = false;

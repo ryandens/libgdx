@@ -45,10 +45,10 @@ public class RandomAccessFile /* implements DataOutput, DataInput, Closeable */ 
 		name = file.getCanonicalPath();
 
 		mode = mode.toLowerCase();
-		if (!mode.equals("r") && !mode.equals("rw")) {
+		if (!"r".equals(mode) && !"rw".equals(mode)) {
 			throw new IllegalArgumentException("mode: '" + mode + "'");
 		}
-		writeable = mode.equals("rw");
+		writeable = "rw".equals(mode);
 		if (file.exists()) {
 			data = atob(File.LocalStorage.getItem(name));
 			len = data.length();

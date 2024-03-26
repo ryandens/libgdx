@@ -232,16 +232,16 @@ public class Hiero extends JFrame {
 			final String param = args[i];
 			final boolean more = i < args.length - 1;
 
-			if (param.equals("-b") || param.equals("--batch")) {
+			if ("-b".equals(param) || "--batch".equals(param)) {
 				batchMode = true;
-			} else if (more && (param.equals("-s") || param.equals("--scale"))) {
+			} else if (more && ("-s".equals(param) || "--scale".equals(param))) {
 				scale = Float.parseFloat(args[++i]);
-			} else if (more && (param.equals("-i") || param.equals("--input"))) {
+			} else if (more && ("-i".equals(param) || "--input".equals(param))) {
 				File f = new File(args[++i]);
 				open(f);
 				fontFileRadio.setText("");
 				updateFont();
-			} else if (more && (param.equals("-o") || param.equals("--output"))) {
+			} else if (more && ("-o".equals(param) || "--output".equals(param))) {
 				File f = new File(args[++i]);
 				saveBm(f);
 			} else {

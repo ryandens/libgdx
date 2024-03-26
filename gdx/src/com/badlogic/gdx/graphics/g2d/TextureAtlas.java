@@ -295,7 +295,7 @@ public class TextureAtlas implements Disposable {
 			});
 			pageFields.put("pma", new Field<Page>() {
 				public void parse (Page page) {
-					page.pma = entry[1].equals("true");
+					page.pma = "true".equals(entry[1]);
 				}
 			});
 
@@ -344,9 +344,9 @@ public class TextureAtlas implements Disposable {
 			regionFields.put("rotate", new Field<Region>() {
 				public void parse (Region region) {
 					String value = entry[1];
-					if (value.equals("true"))
+					if ("true".equals(value))
 						region.degrees = 90;
-					else if (!value.equals("false")) //
+					else if (!"false".equals(value)) //
 						region.degrees = Integer.parseInt(value);
 					region.rotate = region.degrees == 90;
 				}

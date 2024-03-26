@@ -475,7 +475,7 @@ public abstract class AndroidLiveWallpaperService extends WallpaperService {
 			if (DEBUG) Log.d(TAG, " > AndroidWallpaperEngine - onCommand(" + pAction + " " + pX + " " + pY + " " + pZ + " " + pExtras
 				+ " " + pResultRequested + ")" + ", linked: " + (linkedEngine == this));
 
-			if (pAction.equals("android.home.drop")) {
+			if ("android.home.drop".equals(pAction)) {
 				iconDropConsumed = false;
 				xIconDrop = pX;
 				yIconDrop = pY;

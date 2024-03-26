@@ -158,7 +158,7 @@ public class ReflectionCacheSourceCreator {
 		// generate field setters/getters
 		for (SetterGetterStub stub : setterGetterStubs) {
 			String stubSource = generateSetterGetterStub(stub);
-			if (stubSource.equals("")) stub.unused = true;
+			if ("".equals(stubSource)) stub.unused = true;
 			p(stubSource);
 		}
 
@@ -173,7 +173,7 @@ public class ReflectionCacheSourceCreator {
 		// generate methods
 		for (MethodStub stub : methodStubs) {
 			String stubSource = generateMethodStub(stub);
-			if (stubSource.equals("")) stub.unused = true;
+			if ("".equals(stubSource)) stub.unused = true;
 			p(stubSource);
 		}
 
@@ -230,7 +230,7 @@ public class ReflectionCacheSourceCreator {
 		stub.returnType = stub.returnType.replace(".class", "");
 
 		if (stub.isMethod) {
-			boolean isVoid = stub.returnType.equals("void");
+			boolean isVoid = "void".equals(stub.returnType);
 			pbn("private native " + (isVoid ? "Object" : stub.returnType) + " m" + stub.methodId + "(");
 			if (!stub.isStatic) pbn(stub.enclosingType + " obj" + (stub.parameterTypes.size() > 0 ? ", " : ""));
 			int i = 0;
@@ -748,12 +748,12 @@ public class ReflectionCacheSourceCreator {
 	}
 
 	private String cast (String paramType, String arg) {
-		if (paramType.equals("byte") || paramType.equals("short") || paramType.equals("int") || paramType.equals("long")
-			|| paramType.equals("float") || paramType.equals("double")) {
+		if ("byte".equals(paramType) || "short".equals(paramType) || "int".equals(paramType) || "long".equals(paramType)
+			|| "float".equals(paramType) || "double".equals(paramType)) {
 			return "((Number)" + arg + ")." + paramType + "Value()";
-		} else if (paramType.equals("boolean")) {
+		} else if ("boolean".equals(paramType)) {
 			return "((Boolean)" + arg + ")." + paramType + "Value()";
-		} else if (paramType.equals("char")) {
+		} else if ("char".equals(paramType)) {
 			return "((Character)" + arg + ")." + paramType + "Value()";
 		} else {
 			return "((" + paramType + ")" + arg + ")";

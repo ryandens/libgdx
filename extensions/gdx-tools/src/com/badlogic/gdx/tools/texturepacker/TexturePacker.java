@@ -321,7 +321,7 @@ public class TexturePacker {
 			progress.end();
 
 			if (settings.bleed && !settings.premultiplyAlpha
-				&& !(settings.outputFormat.equalsIgnoreCase("jpg") || settings.outputFormat.equalsIgnoreCase("jpeg"))) {
+				&& !("jpg".equalsIgnoreCase(settings.outputFormat) || "jpeg".equalsIgnoreCase(settings.outputFormat))) {
 				canvas = new ColorBleedEffect().processImage(canvas, settings.bleedIterations);
 				g = (Graphics2D)canvas.getGraphics();
 			}
@@ -333,7 +333,7 @@ public class TexturePacker {
 
 			ImageOutputStream ios = null;
 			try {
-				if (settings.outputFormat.equalsIgnoreCase("jpg") || settings.outputFormat.equalsIgnoreCase("jpeg")) {
+				if ("jpg".equalsIgnoreCase(settings.outputFormat) || "jpeg".equalsIgnoreCase(settings.outputFormat)) {
 					BufferedImage newImage = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
 					newImage.getGraphics().drawImage(canvas, 0, 0, null);
 					canvas = newImage;

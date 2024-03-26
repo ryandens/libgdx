@@ -217,7 +217,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 
 			TiledMapTileLayer layer = new TiledMapTileLayer(layerSizeX, layerSizeY, tileSizeX, tileSizeY);
 			layer.setName(id);
-			layer.setVisible(visible.equalsIgnoreCase("True"));
+			layer.setVisible("True".equalsIgnoreCase(visible));
 			Element tileArray = element.getChildByName("TileArray");
 			Array<Element> rows = tileArray.getChildrenByName("Row");
 			TiledMapTileSets tilesets = map.getTileSets();
@@ -231,16 +231,16 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 				for (int child = 0, childCount = currentRow.getChildCount(); child < childCount; child++) {
 					Element currentChild = currentRow.getChild(child);
 					String name = currentChild.getName();
-					if (name.equals("TileSheet")) {
+					if ("TileSheet".equals(name)) {
 						currentTileSet = tilesets.getTileSet(currentChild.getAttribute("Ref"));
 						firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
-					} else if (name.equals("Null")) {
+					} else if ("Null".equals(name)) {
 						x += currentChild.getIntAttribute("Count");
-					} else if (name.equals("Static")) {
+					} else if ("Static".equals(name)) {
 						Cell cell = new Cell();
 						cell.setTile(currentTileSet.getTile(firstgid + currentChild.getIntAttribute("Index")));
 						layer.setCell(x++, y, cell);
-					} else if (name.equals("Animated")) {
+					} else if ("Animated".equals(name)) {
 						// Create an AnimatedTile
 						int interval = currentChild.getInt("Interval");
 						Element frames = currentChild.getChildByName("Frames");
@@ -248,10 +248,10 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 						for (int frameChild = 0, frameChildCount = frames.getChildCount(); frameChild < frameChildCount; frameChild++) {
 							Element frame = frames.getChild(frameChild);
 							String frameName = frame.getName();
-							if (frameName.equals("TileSheet")) {
+							if ("TileSheet".equals(frameName)) {
 								currentTileSet = tilesets.getTileSet(frame.getAttribute("Ref"));
 								firstgid = currentTileSet.getProperties().get("firstgid", Integer.class);
-							} else if (frameName.equals("Static")) {
+							} else if ("Static".equals(frameName)) {
 								frameTiles.add((StaticTiledMapTile)currentTileSet.getTile(firstgid + frame.getIntAttribute("Index")));
 							}
 						}
@@ -278,12 +278,12 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 				String type = property.getAttribute("Type", null);
 				String value = property.getText();
 
-				if (type.equals("Int32")) {
+				if ("Int32".equals(type)) {
 					properties.put(key, Integer.parseInt(value));
-				} else if (type.equals("String")) {
+				} else if ("String".equals(type)) {
 					properties.put(key, value);
-				} else if (type.equals("Boolean")) {
-					properties.put(key, value.equalsIgnoreCase("true"));
+				} else if ("Boolean".equals(type)) {
+					properties.put(key, "true".equalsIgnoreCase(value));
 				} else {
 					properties.put(key, value);
 				}
@@ -296,7 +296,7 @@ public class TideMapLoader extends SynchronousAssetLoader<TiledMap, TideMapLoade
 		FileHandle result = file.parent();
 		while (tokenizer.hasMoreElements()) {
 			String token = tokenizer.nextToken();
-			if (token.equals(".."))
+			if ("..".equals(token))
 				result = result.parent();
 			else {
 				result = result.child(token);

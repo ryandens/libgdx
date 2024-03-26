@@ -52,7 +52,7 @@ public class File {
 			name = pathname;
 		} else if (cut == 0) {
 			name = pathname.substring(cut);
-			parent = name.equals("") ? null : ROOT;
+			parent = "".equals(name) ? null : ROOT;
 		} else {
 			name = pathname.substring(cut + 1);
 			parent = new File(pathname.substring(0, cut));
@@ -91,7 +91,7 @@ public class File {
 	}
 
 	private boolean isRoot () {
-		return name.equals("") && parent == null;
+		return "".equals(name) && parent == null;
 	}
 
 	public boolean isAbsolute () {
@@ -125,13 +125,13 @@ public class File {
 
 	public File getCanonicalFile () {
 		File cParent = parent == null ? null : parent.getCanonicalFile();
-		if (name.equals(".")) {
+		if (".".equals(name)) {
 			return cParent == null ? ROOT : cParent;
 		}
-		if (cParent != null && cParent.name.equals("")) {
+		if (cParent != null && "".equals(cParent.name)) {
 			cParent = null;
 		}
-		if (name.equals("..")) {
+		if ("..".equals(name)) {
 			if (cParent == null) {
 				return ROOT;
 			}
@@ -140,7 +140,7 @@ public class File {
 			}
 			return cParent.parent;
 		}
-		if (cParent == null && !name.equals("")) {
+		if (cParent == null && !"".equals(name)) {
 			return new File(ROOT, name);
 		}
 		return new File(cParent, name);

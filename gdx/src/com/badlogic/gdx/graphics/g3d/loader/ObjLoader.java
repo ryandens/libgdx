@@ -175,9 +175,9 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 						activeGroup = setActiveGroup(tokens[1]);
 					else
 						activeGroup = setActiveGroup("default");
-				} else if (tokens[0].equals("mtllib")) {
+				} else if ("mtllib".equals(tokens[0])) {
 					mtl.load(file.parent().child(tokens[1]));
-				} else if (tokens[0].equals("usemtl")) {
+				} else if ("usemtl".equals(tokens[0])) {
 					if (tokens.length == 1)
 						activeGroup.materialName = "default";
 					else
@@ -356,7 +356,7 @@ class MtlLoader {
 					continue;
 				else {
 					final String key = tokens[0].toLowerCase();
-					if (key.equals("newmtl")) {
+					if ("newmtl".equals(key)) {
 						ModelMaterial mat = currentMaterial.build();
 						materials.add(mat);
 
@@ -368,25 +368,25 @@ class MtlLoader {
 						}
 
 						currentMaterial.reset();
-					} else if (key.equals("ka")) {
+					} else if ("ka".equals(key)) {
 						currentMaterial.ambientColor = parseColor(tokens);
-					} else if (key.equals("kd")) {
+					} else if ("kd".equals(key)) {
 						currentMaterial.diffuseColor = parseColor(tokens);
-					} else if (key.equals("ks")) {
+					} else if ("ks".equals(key)) {
 						currentMaterial.specularColor = parseColor(tokens);
-					} else if (key.equals("tr") || key.equals("d")) {
+					} else if ("tr".equals(key) || "d".equals(key)) {
 						currentMaterial.opacity = Float.parseFloat(tokens[1]);
-					} else if (key.equals("ns")) {
+					} else if ("ns".equals(key)) {
 						currentMaterial.shininess = Float.parseFloat(tokens[1]);
-					} else if (key.equals("map_d")) {
+					} else if ("map_d".equals(key)) {
 						currentMaterial.alphaTexFilename = file.parent().child(tokens[1]).path();
-					} else if (key.equals("map_ka")) {
+					} else if ("map_ka".equals(key)) {
 						currentMaterial.ambientTexFilename = file.parent().child(tokens[1]).path();
-					} else if (key.equals("map_kd")) {
+					} else if ("map_kd".equals(key)) {
 						currentMaterial.diffuseTexFilename = file.parent().child(tokens[1]).path();
-					} else if (key.equals("map_ks")) {
+					} else if ("map_ks".equals(key)) {
 						currentMaterial.specularTexFilename = file.parent().child(tokens[1]).path();
-					} else if (key.equals("map_ns")) {
+					} else if ("map_ns".equals(key)) {
 						currentMaterial.shininessTexFilename = file.parent().child(tokens[1]).path();
 					}
 				}
