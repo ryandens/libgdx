@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.particles.values.ScaledNumericValue;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import java.security.SecureRandom;
 
 /** It's an {@link Influencer} which controls particles color and transparency.
  * @author Inferno */
@@ -50,7 +51,7 @@ public abstract class ColorInfluencer extends Influencer {
 
 		@Override
 		public Random copy () {
-			return new Random();
+			return new SecureRandom();
 		}
 	}
 
