@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tools.hiero;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class HieroSettings {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(Gdx.files.absolute(hieroFileRef).read(), "UTF-8"));
 			while (true) {
-				String line = reader.readLine();
+				String line = BoundedLineReader.readLine(reader, 5_000_000);
 				if (line == null) break;
 				line = line.trim();
 				if (line.length() == 0) continue;

@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Comparator;
@@ -360,15 +361,15 @@ public class TextureAtlas implements Disposable {
 
 			BufferedReader reader = packFile.reader(1024);
 			try {
-				String line = reader.readLine();
+				String line = BoundedLineReader.readLine(reader, 5_000_000);
 				// Ignore empty lines before first entry.
 				while (line != null && line.trim().length() == 0)
-					line = reader.readLine();
+					line = BoundedLineReader.readLine(reader, 5_000_000);
 				// Header entries.
 				while (true) {
 					if (line == null || line.trim().length() == 0) break;
 					if (readEntry(entry, line) == 0) break; // Silently ignore all header fields.
-					line = reader.readLine();
+					line = BoundedLineReader.readLine(reader, 5_000_000);
 				}
 				// Page and region entries.
 				Page page = null;
@@ -377,12 +378,12 @@ public class TextureAtlas implements Disposable {
 					if (line == null) break;
 					if (line.trim().length() == 0) {
 						page = null;
-						line = reader.readLine();
+						line = BoundedLineReader.readLine(reader, 5_000_000);
 					} else if (page == null) {
 						page = new Page();
 						page.textureFile = imagesDir.child(line);
 						while (true) {
-							if (readEntry(entry, line = reader.readLine()) == 0) break;
+							if (readEntry(entry, line = BoundedLineReader.readLine(reader, 5_000_000)) == 0) break;
 							Field field = pageFields.get(entry[0]);
 							if (field != null) field.parse(page); // Silently ignore unknown page fields.
 						}
@@ -393,7 +394,7 @@ public class TextureAtlas implements Disposable {
 						region.name = line.trim();
 						if (flip) region.flip = true;
 						while (true) {
-							int count = readEntry(entry, line = reader.readLine());
+							int count = readEntry(entry, line = BoundedLineReader.readLine(reader, 5_000_000));
 							if (count == 0) break;
 							Field field = regionFields.get(entry[0]);
 							if (field != null)
