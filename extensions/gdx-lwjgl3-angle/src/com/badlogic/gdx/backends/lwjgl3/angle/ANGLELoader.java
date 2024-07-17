@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.*;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.Random;
 import java.util.UUID;
 import java.util.zip.CRC32;
@@ -109,7 +110,7 @@ public class ANGLELoader {
 
 		// System provided temp directory.
 		try {
-			File file = File.createTempFile(dirName, null);
+			File file = Files.createTempFile(dirName, null).toFile();
 			if (file.delete()) {
 				file = new File(file, fileName);
 				if (canWrite(file)) return file;

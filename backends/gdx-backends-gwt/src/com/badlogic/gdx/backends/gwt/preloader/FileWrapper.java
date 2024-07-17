@@ -35,6 +35,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import java.nio.file.Files;
 
 /** Used in PreloaderBundleGenerator to ease my pain. Since we emulate the original FileHandle, i have to make a copy...
  * @author mzechner
@@ -523,7 +524,7 @@ public class FileWrapper {
 
 	static public FileWrapper tempFile (String prefix) {
 		try {
-			return new FileWrapper(File.createTempFile(prefix, null));
+			return new FileWrapper(Files.createTempFile(prefix, null).toFile());
 		} catch (IOException ex) {
 			throw new GdxRuntimeException("Unable to create temp file.", ex);
 		}
@@ -531,7 +532,7 @@ public class FileWrapper {
 
 	static public FileWrapper tempDirectory (String prefix) {
 		try {
-			File file = File.createTempFile(prefix, null);
+			File file = Files.createTempFile(prefix, null).toFile();
 			if (!file.delete()) throw new IOException("Unable to delete temp file: " + file);
 			if (!file.mkdir()) throw new IOException("Unable to create temp directory: " + file);
 			return new FileWrapper(file);

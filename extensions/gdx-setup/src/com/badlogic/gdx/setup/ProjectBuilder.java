@@ -22,6 +22,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class ProjectBuilder {
 	}
 
 	public boolean build (Language language) throws IOException {
-		settingsFile = File.createTempFile("libgdx-setup-settings", ".gradle");
-		buildFile = File.createTempFile("libgdx-setup-build", ".gradle");
+		settingsFile = Files.createTempFile("libgdx-setup-settings", ".gradle").toFile();
+		buildFile = Files.createTempFile("libgdx-setup-build", ".gradle").toFile();
 		if (!settingsFile.exists()) {
 			settingsFile.createNewFile();
 		}
