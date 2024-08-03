@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -188,7 +189,7 @@ public class ParticleEffect implements Disposable {
 			while (true) {
 				ParticleEmitter emitter = newEmitter(reader);
 				emitters.add(emitter);
-				if (reader.readLine() == null) break;
+				if (BoundedLineReader.readLine(reader, 5_000_000) == null) break;
 			}
 		} catch (IOException ex) {
 			throw new GdxRuntimeException("Error loading effect: " + effectFile, ex);

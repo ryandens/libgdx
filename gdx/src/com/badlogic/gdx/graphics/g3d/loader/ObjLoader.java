@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.graphics.g3d.loader;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -120,7 +121,7 @@ public class ObjLoader extends ModelLoader<ObjLoader.ObjLoaderParameters> {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(file.read()), 4096);
 		int id = 0;
 		try {
-			while ((line = reader.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
 
 				tokens = line.split("\\s+");
 				if (tokens.length < 1) break;
@@ -344,7 +345,7 @@ class MtlLoader {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(file.read()), 4096);
 		try {
-			while ((line = reader.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
 
 				if (line.length() > 0 && line.charAt(0) == '\t') line = line.substring(1).trim();
 
