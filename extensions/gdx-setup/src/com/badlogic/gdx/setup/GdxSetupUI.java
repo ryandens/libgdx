@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.setup;
 
+import io.github.pixee.security.SystemCommand;
 import static java.awt.GridBagConstraints.BOTH;
 import static java.awt.GridBagConstraints.CENTER;
 import static java.awt.GridBagConstraints.EAST;
@@ -196,10 +197,10 @@ public class GdxSetupUI extends JFrame {
 				try { // give them a poke in the right direction
 					if (System.getProperty("os.name").contains("Windows")) {
 						String replaced = sdkLocation.replace("\\", "\\\\");
-						Runtime.getRuntime().exec("\"" + replaced + "\\SDK Manager.exe\"");
+						SystemCommand.runCommand(Runtime.getRuntime(), "\"" + replaced + "\\SDK Manager.exe\"");
 					} else {
 						File sdkManager = new File(sdkLocation, "tools/android");
-						Runtime.getRuntime().exec(new String[] {sdkManager.getAbsolutePath(), "sdk"});
+						SystemCommand.runCommand(Runtime.getRuntime(), new String[] {sdkManager.getAbsolutePath(), "sdk"});
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
