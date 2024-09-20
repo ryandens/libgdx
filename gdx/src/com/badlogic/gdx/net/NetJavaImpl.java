@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.net;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -171,9 +173,9 @@ public class NetJavaImpl {
 				String queryString = "";
 				String value = httpRequest.getContent();
 				if (value != null && !"".equals(value)) queryString = "?" + value;
-				url = new URL(httpRequest.getUrl() + queryString);
+				url = Urls.create(httpRequest.getUrl() + queryString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			} else {
-				url = new URL(httpRequest.getUrl());
+				url = Urls.create(httpRequest.getUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			}
 
 			final HttpURLConnection connection = (HttpURLConnection)url.openConnection();

@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.tests;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -45,7 +47,7 @@ public class TextureDownloadTest extends GdxTest {
 				InputStream in = null;
 				try {
 					HttpURLConnection conn = null;
-					conn = (HttpURLConnection)new URL(url).openConnection();
+					conn = (HttpURLConnection)Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 					conn.setDoInput(true);
 					conn.setDoOutput(false);
 					conn.setUseCaches(true);
