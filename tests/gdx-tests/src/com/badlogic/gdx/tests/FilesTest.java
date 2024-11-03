@@ -13,6 +13,7 @@
 
 package com.badlogic.gdx.tests;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -80,7 +81,7 @@ public class FilesTest extends GdxTest {
 			BufferedReader in = null;
 			try {
 				in = new BufferedReader(new InputStreamReader(Gdx.files.external("test.txt").read()));
-				if (!in.readLine().equals("test"))
+				if (!BoundedLineReader.readLine(in, 5_000_000).equals("test"))
 					message += "Read result wrong\n";
 				else
 					message += "Read external success\n";
@@ -124,7 +125,7 @@ public class FilesTest extends GdxTest {
 			BufferedReader in = null;
 			try {
 				in = new BufferedReader(new InputStreamReader(Gdx.files.local("test.txt").read()));
-				if (!in.readLine().equals("test"))
+				if (!BoundedLineReader.readLine(in, 5_000_000).equals("test"))
 					message += "Read result wrong\n";
 				else
 					message += "Read local success\n";
