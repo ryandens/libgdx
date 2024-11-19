@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.*;
 import java.lang.reflect.Method;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.UUID;
 import java.util.zip.CRC32;
@@ -34,7 +35,7 @@ public class ANGLELoader {
 	static public boolean is64Bit = System.getProperty("os.arch").contains("64")
 		|| System.getProperty("os.arch").startsWith("armv8");
 
-	static private final Random random = new Random();
+	static private final Random random = new SecureRandom();
 	static private File egl;
 	static private File gles;
 	static private File lastWorkingDir;

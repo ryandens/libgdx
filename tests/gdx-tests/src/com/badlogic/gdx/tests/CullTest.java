@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tests;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -58,7 +59,7 @@ public class CullTest extends GdxTest implements ApplicationListener {
 		cam.near = 1;
 		cam.far = 200;
 
-		Random rand = new Random();
+		Random rand = new SecureRandom();
 		for (int i = 0; i < instances.length; i++) {
 			pos.set(rand.nextFloat() * 100 - rand.nextFloat() * 100, rand.nextFloat() * 100 - rand.nextFloat() * 100,
 				rand.nextFloat() * -100 - 3);

@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tests;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -50,7 +51,7 @@ public class TileTest extends GdxTest {
 
 		texture = new Texture(Gdx.files.internal("data/tiles.png"));
 
-		Random rand = new Random();
+		Random rand = new SecureRandom();
 		for (int i = 0; i < LAYERS; i++) {
 			caches[i] = new SpriteCache();
 			SpriteCache cache = caches[i];

@@ -42,6 +42,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
+import java.security.SecureRandom;
 
 import java.util.Random;
 
@@ -182,7 +183,7 @@ public class OctreeTest extends GdxTest implements ApplicationListener {
 	}
 
 	private void generateGameObjects () {
-		Random random = new Random();
+		Random random = new SecureRandom();
 		ModelBuilder modelBuilder = new ModelBuilder();
 
 		Material objectMaterial = new Material();

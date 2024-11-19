@@ -40,6 +40,7 @@ import com.badlogic.gdx.math.collision.OrientedBoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
+import java.security.SecureRandom;
 
 import java.util.Random;
 
@@ -197,7 +198,7 @@ public class OrientedBoundingBoxTest extends GdxTest implements ApplicationListe
 		}
 
 		private void buildMovement () {
-			Random random = new Random();
+			Random random = new SecureRandom();
 			float speed = random.nextFloat();
 			float radius = 1 / 30f;
 

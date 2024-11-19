@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.math;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 /** This class implements the xorshift128+ algorithm that is a very fast, top-quality 64-bit pseudo-random number generator. The
@@ -46,7 +47,7 @@ public class RandomXS128 extends Random {
 	 * <p>
 	 * This implementation creates a {@link Random} instance to generate the initial seed. */
 	public RandomXS128 () {
-		setSeed(new Random().nextLong());
+		setSeed(new SecureRandom().nextLong());
 	}
 
 	/** Creates a new random number generator using a single {@code long} seed.

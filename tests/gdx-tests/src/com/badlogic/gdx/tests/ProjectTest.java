@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tests;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -54,7 +55,7 @@ public class ProjectTest extends GdxTest {
 		sphere.materials.get(0).set(new ColorAttribute(ColorAttribute.Diffuse, Color.WHITE));
 		cam = new PerspectiveCamera(45, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.far = 200;
-		Random rand = new Random();
+		Random rand = new SecureRandom();
 		for (int i = 0; i < instances.length; i++) {
 			instances[i] = new ModelInstance(sphere, rand.nextFloat() * 100 - rand.nextFloat() * 100,
 				rand.nextFloat() * 100 - rand.nextFloat() * 100, rand.nextFloat() * -100 - 3);

@@ -31,6 +31,7 @@ import com.badlogic.gdx.tests.utils.GdxTest;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import java.security.SecureRandom;
 
 import java.util.Random;
 
@@ -59,7 +60,7 @@ public class StagePerformanceTest extends GdxTest {
 			}
 		}
 
-		Random rand = new Random();
+		Random rand = new SecureRandom();
 		for (int y = 0, i = 0; y < 12; y++) {
 			for (int x = 0; x < 24; x++) {
 				Image img = new Image(regions[rand.nextInt(8 * 8)]);
