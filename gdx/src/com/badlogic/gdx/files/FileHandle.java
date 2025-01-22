@@ -43,6 +43,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.StreamUtils;
+import java.nio.file.Files;
 
 /** Represents a file or directory on the filesystem, classpath, Android app storage, or Android assets directory. FileHandles are
  * created via a {@link Files} instance.
@@ -676,7 +677,7 @@ public class FileHandle {
 
 	static public FileHandle tempFile (String prefix) {
 		try {
-			return new FileHandle(File.createTempFile(prefix, null));
+			return new FileHandle(Files.createTempFile(prefix, null).toFile());
 		} catch (IOException ex) {
 			throw new GdxRuntimeException("Unable to create temp file.", ex);
 		}
@@ -684,7 +685,7 @@ public class FileHandle {
 
 	static public FileHandle tempDirectory (String prefix) {
 		try {
-			File file = File.createTempFile(prefix, null);
+			File file = Files.createTempFile(prefix, null).toFile();
 			if (!file.delete()) throw new IOException("Unable to delete temp file: " + file);
 			if (!file.mkdir()) throw new IOException("Unable to create temp directory: " + file);
 			return new FileHandle(file);
