@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tests.g3d;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import com.badlogic.gdx.files.FileHandle;
@@ -96,7 +97,7 @@ public class ShaderLoader {
 		stringBuilder.setLength(0);
 		int idx;
 		try {
-			while ((line = reader.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
 				if (line.length() > 3 && line.charAt(0) == '[' && (idx = line.indexOf(']')) > 1) {
 					if (snipName.length() > 0 || stringBuilder.length() > 0) result.put(snipName, stringBuilder.toString());
 					stringBuilder.setLength(0);

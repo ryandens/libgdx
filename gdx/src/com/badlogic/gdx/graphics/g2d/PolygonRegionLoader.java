@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.graphics.g2d;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -80,7 +81,7 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 		String image = null;
 		try {
 			BufferedReader reader = file.reader(params.readerBuffer);
-			for (String line = reader.readLine(); line != null; line = reader.readLine())
+			for (String line = BoundedLineReader.readLine(reader, 5_000_000); line != null; line = BoundedLineReader.readLine(reader, 5_000_000))
 				if (line.startsWith(params.texturePrefix)) {
 					image = line.substring(params.texturePrefix.length());
 					break;
@@ -117,7 +118,7 @@ public class PolygonRegionLoader extends SynchronousAssetLoader<PolygonRegion, P
 		BufferedReader reader = file.reader(256);
 		try {
 			while (true) {
-				String line = reader.readLine();
+				String line = BoundedLineReader.readLine(reader, 5_000_000);
 				if (line == null) break;
 				if (line.startsWith("s")) {
 					// Read shape.
