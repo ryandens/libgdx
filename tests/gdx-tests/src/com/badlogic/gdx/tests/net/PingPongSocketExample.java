@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.tests.net;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,7 +48,7 @@ public class PingPongSocketExample extends GdxTest {
 				Socket client = server.accept(null);
 				// read message and send it back
 				try {
-					String message = new BufferedReader(new InputStreamReader(client.getInputStream())).readLine();
+					String message = BoundedLineReader.readLine(new BufferedReader(new InputStreamReader(client.getInputStream())), 5_000_000);
 					Gdx.app.log("PingPongSocketExample", "got client message: " + message);
 					client.getOutputStream().write("PONG\n".getBytes());
 				} catch (IOException e) {
@@ -62,7 +63,7 @@ public class PingPongSocketExample extends GdxTest {
 		Socket client = Gdx.net.newClientSocket(Protocol.TCP, "localhost", 9999, hints);
 		try {
 			client.getOutputStream().write("PING\n".getBytes());
-			String response = new BufferedReader(new InputStreamReader(client.getInputStream())).readLine();
+			String response = BoundedLineReader.readLine(new BufferedReader(new InputStreamReader(client.getInputStream())), 5_000_000);
 			Gdx.app.log("PingPongSocketExample", "got server message: " + response);
 		} catch (IOException e) {
 			Gdx.app.log("PingPongSocketExample", "an error occured", e);

@@ -28,6 +28,7 @@
 
 package com.badlogic.gdx.tests.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -354,7 +355,7 @@ public class GdxTests {
 			try {
 				reader = new BufferedReader(new InputStreamReader(mappingInput), 512);
 				while (true) {
-					String line = reader.readLine();
+					String line = BoundedLineReader.readLine(reader, 5_000_000);
 					if (line == null) break;
 					if (line.startsWith("    ")) continue;
 					String[] split = line.replace(":", "").split(" -> ");
